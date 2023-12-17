@@ -53,6 +53,31 @@ export const constantRoutes: RouteRecordRaw[] = [
       },
     ],
   },
+  {
+    path: "/emotions",
+    component: Layout,
+    redirect: "/emotions/user",
+    name: "/emotions",
+    meta: {
+      title: "体验地图",
+      icon: "homepage",
+      roles: ["ADMIN"],
+    },
+    children: [
+      {
+        path: "user",
+        component: () => import("@/views/emotions/index.vue"),
+        name: "体验地图",
+        meta: {
+          title: "体验地图",
+          icon: "user",
+          keepAlive: true,
+          hidden: false,
+          roles: ["ADMIN"],
+        },
+      },
+    ],
+  },
 
   // 外部链接
   // {
