@@ -59,6 +59,11 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           rewrite: (path) =>
             path.replace(new RegExp("^" + env.VITE_APP_BASE_API), ""),
         },
+        "/emotion-api": {
+          changeOrigin: true,
+          target: "http://36.137.226.16:11133",
+          rewrite: (path) => path.replace(new RegExp("^" + "/emotion-api"), ""),
+        },
       },
     },
     plugins: [

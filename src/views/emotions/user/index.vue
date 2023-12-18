@@ -23,6 +23,7 @@
         <div class="column-content">第六步</div>
       </el-col>
     </el-row>
+    <!--
     <el-row :gutter="12" class="target row">
       <el-col :span="4">
         <div class="column-content column-first">用户目标</div>
@@ -99,6 +100,7 @@
         </div>
       </el-col>
     </el-row>
+    -->
     <el-row :gutter="12" class="touch row">
       <el-col :span="4">
         <div class="column-content column-first">接触点</div>
@@ -166,10 +168,29 @@
   </div>
 </template>
 <script setup lang="ts">
-import LineChart from "./components/LineChart.vue";
+import LineChart from "../components/LineChart.vue";
+import { getUserContent } from "@/api/emotion/index";
+import { onMounted, ref } from "vue";
+import { ExperienceItem } from "@/api/emotion/types";
+
 defineOptions({
   name: "Emotions",
 });
+onMounted(() => {
+  handleQuery();
+});
+const loading = ref(false);
+const pageData = ref<ExperienceItem[]>([]);
+function handleQuery() {
+  loading.value = true;
+  getUserContent({ user_id: "111" })
+    .then(({ data }) => {
+      pageData.value = data;
+    })
+    .finally(() => {
+      loading.value = false;
+    });
+}
 </script>
 <style scoped lang="scss">
 .el-row:not(:first-child) {
