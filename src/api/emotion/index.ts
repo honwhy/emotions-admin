@@ -14,3 +14,11 @@ export function getUserContent(data: any): AxiosPromise<ExperienceItem[]> {
     data: data,
   });
 }
+
+export function getUserList(data: any): AxiosPromise<string[]> {
+  return request2({
+    url: "/experience/getUserList",
+    method: "post",
+    data: data,
+  });
+}
