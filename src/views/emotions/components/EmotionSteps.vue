@@ -92,7 +92,7 @@
 <script setup lang="ts">
 import { ExperienceItem } from "@/api/emotion/types";
 import { getUserContent } from "@/api/emotion/index";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 interface Props {
   userId: string;
@@ -113,6 +113,12 @@ function handleQuery() {
       loading.value = false;
     });
 }
+watch(
+  () => props.userId,
+  () => {
+    handleQuery();
+  }
+);
 </script>
 <style scoped lang="scss">
 .el-row:not(:first-child) {

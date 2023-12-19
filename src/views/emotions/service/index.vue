@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import { getModList, getContentList } from "@/api/emotion/index";
 import { ref } from "vue";
 defineOptions({
   name: "ServiceEmotions",
@@ -36,4 +37,20 @@ const data = [
   },
 ];
 const tableData = ref(data);
+
+onMounted(() => {
+  queryModList();
+  queryContentList();
+});
+
+function queryModList() {
+  getModList({}).then(({ data }) => {
+    console.log("ModList=>", data);
+  });
+}
+function queryContentList() {
+  getContentList({ module: "hsh", content: "" }).then(({ data }) => {
+    console.log("contentList=>", data);
+  });
+}
 </script>

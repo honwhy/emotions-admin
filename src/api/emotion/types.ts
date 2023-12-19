@@ -7,6 +7,7 @@ export interface ExperienceItem {
   create_time: number;
   score: number;
   summary: string;
+  module: string;
 }
 
 export interface QaAnswer {

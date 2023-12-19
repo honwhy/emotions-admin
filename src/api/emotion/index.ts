@@ -51,3 +51,15 @@ export function getContentList(data: any): AxiosPromise<ExperienceItem[]> {
     data: data,
   });
 }
+/**
+ * 获取模块列表
+ * @param data
+ * @returns
+ */
+export function getModList(data: any): AxiosPromise<string[]> {
+  return request2({
+    url: "/business/getModuleList",
+    method: "post",
+    data: data,
+  });
+}
