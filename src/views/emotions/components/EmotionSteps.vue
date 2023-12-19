@@ -224,13 +224,18 @@ watch(
 
     .top,
     .bottom {
-      flex-direction: column;
+      display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
     }
 
     .top {
-      height: 40%;
+      height: 30%;
+    }
+
+    .bottom {
+      flex: 1;
     }
   }
 }
