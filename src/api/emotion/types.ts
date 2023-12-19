@@ -8,3 +8,8 @@ export interface ExperienceItem {
   score: number;
   summary: string;
 }
+
+export interface QaAnswer {
+  score: number;
+  summary: string;
+}

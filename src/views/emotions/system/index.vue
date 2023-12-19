@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <EmotionSteps />
+    <EmotionSteps :user-id="''" />
   </div>
 </template>
 <script setup lang="ts">

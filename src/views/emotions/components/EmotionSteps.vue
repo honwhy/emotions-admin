@@ -95,7 +95,7 @@ import { getUserContent } from "@/api/emotion/index";
 import { onMounted, ref } from "vue";
 
 interface Props {
-  userId?: string;
+  userId: string;
 }
 const props = defineProps<Props>();
 onMounted(() => {
@@ -105,7 +105,7 @@ const loading = ref(false);
 const pageData = ref<ExperienceItem[]>([]);
 function handleQuery() {
   loading.value = true;
-  getUserContent({ user_id: props.userId ?? undefined })
+  getUserContent({ user_id: props.userId })
     .then(({ data }) => {
       pageData.value = data;
     })

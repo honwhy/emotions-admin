@@ -1,6 +1,12 @@
 <template>
   <div class="app-container">
-    <el-select v-model="userId" class="m-2" placeholder="请选择" size="large">
+    <el-select
+      v-model="userId"
+      class="m-2"
+      placeholder="请选择"
+      size="large"
+      default-first-option
+    >
       <el-option
         v-for="item in userList"
         :key="item"
@@ -8,7 +14,8 @@
         :value="item"
       />
     </el-select>
-    <EmotionSteps />
+    <EmotionSteps :user-id="userId" v-if="userId !== ''" />
+    <el-empty v-else description="请选择用户进行查询" />
   </div>
 </template>
 <script setup lang="ts">
