@@ -55,7 +55,7 @@ const ydata = computed(() => {
 const options = computed<EChartsOption>(() => ({
   grid: {
     // 让图表占满容器
-    top: "68px",
+    top: "60px",
     left: "0px",
     right: "0px",
     bottom: "0px",
@@ -64,7 +64,7 @@ const options = computed<EChartsOption>(() => ({
     shadowBlur: 0,
   },
   legend: {
-    top: 20,
+    padding: [10, 0, 0, 0],
   },
   xAxis: {
     type: "category",

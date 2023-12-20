@@ -4,6 +4,21 @@
       <el-col :span="4">
         <div class="column-first column-content">阶段</div>
       </el-col>
+      <el-col v-for="item in pageData" :key="item.flow_path" :span="3">
+        <div class="column-content">
+          {{ item.flow_path }}
+        </div>
+      </el-col>
+      <template v-if="pageData.length === 0">
+        <el-col
+          v-for="item in Array.from([1, 2, 3, 4, 5, 6])"
+          :key="item"
+          :span="3"
+        >
+          <div class="column-content">--</div>
+        </el-col>
+      </template>
+      <!--
       <el-col :span="3">
         <div class="column-content arrow-right">第一步</div>
       </el-col>
@@ -22,6 +37,7 @@
       <el-col :span="3">
         <div class="column-content">第六步</div>
       </el-col>
+      -->
     </el-row>
     <el-row :gutter="12" class="touch row">
       <el-col :span="4">
