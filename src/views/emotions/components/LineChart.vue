@@ -1,22 +1,36 @@
 <template>
-  <v-chart :option="option" />
+  <v-chart ref="instance" :option="option" />
 </template>
 <script setup lang="ts">
 import { use } from "echarts/core";
 import { LineChart } from "echarts/charts";
-import { GridComponent, TooltipComponent } from "echarts/components";
+import {
+  GridComponent,
+  TooltipComponent,
+  LegendComponent,
+} from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 import type { ComposeOption } from "echarts/core";
 import type { LineSeriesOption } from "echarts/charts";
 import type {
   GridComponentOption,
   TooltipComponentOption,
+  LegendComponentOption,
 } from "echarts/components";
 
-use([GridComponent, TooltipComponent, LineChart, CanvasRenderer]);
+use([
+  GridComponent,
+  TooltipComponent,
+  LegendComponent,
+  LineChart,
+  CanvasRenderer,
+]);
 
 type EChartsOption = ComposeOption<
-  GridComponentOption | TooltipComponentOption | LineSeriesOption
+  | GridComponentOption
+  | TooltipComponentOption
+  | LegendComponentOption
+  | LineSeriesOption
 >;
 
 import VChart from "vue-echarts";
@@ -28,15 +42,21 @@ const option = ref<EChartsOption>({
   grid: {
     // 让图表占满容器
     top: "68px",
-    left: "8px",
-    right: "8px",
+    left: "0px",
+    right: "0px",
     bottom: "0px",
+    show: true,
+    borderColor: "#ccc",
+    shadowBlur: 0,
+  },
+  legend: {
+    top: 20,
   },
   xAxis: {
     type: "category",
-    boundaryGap: false,
-    data: [1, 2, 3, 4, 5, 6],
+    data: [0, 1, 2, 3, 4, 5, 6, 7],
     show: false,
+    boundaryGap: false,
   },
   yAxis: {
     type: "value",
@@ -53,18 +73,22 @@ const option = ref<EChartsOption>({
   },
   series: [
     {
-      data: [1, 3, 2, 3, 3, 5, 4],
+      data: [1, 1, 3, 2, 3, 5, 4, 4],
       type: "line",
+      smooth: true,
       lineStyle: {
         color: "#edf0ff",
       },
       areaStyle: {
-        color: "#edf0ff",
+        color: "#bbbee5",
       },
       label: {
         show: true,
         position: "inside",
-        formatter: ({ data }) => {
+        formatter: ({ data, dataIndex }) => {
+          if (dataIndex === 0 || dataIndex === 7) {
+            return "";
+          }
           switch (data) {
             case 1:
               return `🙄`;
@@ -80,7 +104,14 @@ const option = ref<EChartsOption>({
           return `😁`;
         },
       },
+      endLabel: {
+        show: false,
+        height: 0,
+        width: 0,
+      },
     },
   ],
 });
+const instance = ref();
+console.log("instance", instance);
 </script>
