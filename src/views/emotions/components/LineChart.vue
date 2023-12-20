@@ -67,17 +67,17 @@ const option = ref<EChartsOption>({
         formatter: ({ data }) => {
           switch (data) {
             case 1:
-              return `😁`;
+              return `🙄`;
             case 2:
-              return `😊`;
+              return `😶`;
             case 3:
               return `🙂`;
             case 4:
-              return `😶`;
+              return `😊`;
             case 5:
-              return `🙄`;
+              return `😁`;
           }
-          return `🙄`;
+          return `😁`;
         },
       },
     },
