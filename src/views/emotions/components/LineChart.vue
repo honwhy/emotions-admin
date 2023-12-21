@@ -1,9 +1,11 @@
 <template>
   <v-chart
+    id="v-chart"
     ref="instance"
     :option="options"
     class="v-charts"
     @selectchanged="handleSelect"
+    @rendered="handleFinished"
   />
 </template>
 <script setup lang="ts">
@@ -22,7 +24,7 @@ import type {
   TooltipComponentOption,
   LegendComponentOption,
 } from "echarts/components";
-
+import { debounce } from "lodash-es";
 use([
   GridComponent,
   TooltipComponent,
@@ -39,10 +41,9 @@ type EChartsOption = ComposeOption<
 >;
 
 import VChart from "vue-echarts";
-import { ref, computed } from "vue";
+import { ref, computed, nextTick } from "vue";
 import { ExperienceItem } from "@/api/emotion/types";
 import { pushContent } from "@/api/emotion/index";
-import { connect } from "net";
 
 use([GridComponent, LineChart, CanvasRenderer]);
 interface Props {
@@ -76,7 +77,7 @@ const options = computed<EChartsOption>(() => ({
     show: true,
     boundaryGap: false,
     axisPointer: {
-      value: 1,
+      value: 0,
       z: 1,
       snap: true,
       lineStyle: {
@@ -132,6 +133,7 @@ const options = computed<EChartsOption>(() => ({
       label: {
         show: true,
         position: "inside",
+        fontSize: 18,
         formatter: ({ data, dataIndex }) => {
           if (dataIndex === 0 || dataIndex === 7) {
             return "-";
@@ -191,6 +193,20 @@ function handleSelect(arg: { fromActionPayload: { dataIndexInside: number } }) {
     })
     .catch(() => {});
 }
+const instance = ref<InstanceType<typeof VChart>>();
+const loading = ref(false);
+const handleFinished = debounce(() => {
+  loading.value = true;
+  console.log("handleFinished");
+  console.log("instance", instance.value?.chart);
+  nextTick(() => {
+    instance.value?.chart?.dispatchAction({
+      type: "showTip",
+      dataIndex: 1,
+    });
+    loading.value = false;
+  });
+});
 const option = ref<EChartsOption>({
   grid: {
     // 让图表占满容器
