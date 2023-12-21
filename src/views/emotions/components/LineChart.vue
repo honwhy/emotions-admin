@@ -160,15 +160,19 @@ function handleSelect(arg: { fromActionPayload: { dataIndexInside: number } }) {
   ) {
     return;
   }
-  ElMessageBox.confirm("是否确认推送数据到业务系统", "提示", {
-    appendTo: "body",
-    customStyle: {
-      zIndex: 9999,
-    },
-  })
+  const content = props.list[params.dataIndexInside - 1];
+  ElMessageBox.confirm(
+    "是否确认推送数据到业务系统：" + content.module,
+    "提示",
+    {
+      appendTo: "body",
+      customStyle: {
+        zIndex: 9999,
+      },
+    }
+  )
     .then(() => {
       console.log("确认处理的逻辑");
-      const content = props.list[params.dataIndexInside - 1];
       const p = {
         module: content.module,
         content,
