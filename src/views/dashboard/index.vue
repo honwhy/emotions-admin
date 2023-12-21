@@ -61,7 +61,7 @@ orderCount.value = 2000;
 </script>
 
 <template>
-  <div class="dashboard-container">
+  <div class="dashboard-container" v-show="false">
     <!-- github角标 -->
     <github-corner class="github-corner" />
 

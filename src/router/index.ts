@@ -26,7 +26,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     path: "/",
     name: "/",
     component: Layout,
-    redirect: "/dashboard",
+    redirect: "/emotions",
     children: [
       {
         path: "dashboard",
@@ -60,7 +60,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     name: "/emotions",
     meta: {
       title: "体验地图",
-      icon: "homepage",
+      icon: "monitor",
       roles: ["ADMIN"],
     },
     children: [
@@ -70,7 +70,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "UserEmotions",
         meta: {
           title: "用户体验地图",
-          icon: "user",
+          icon: "role",
           keepAlive: true,
           hidden: false,
           roles: ["ADMIN"],
@@ -82,7 +82,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "SystemEmotions",
         meta: {
           title: "系统体验地图",
-          icon: "user",
+          icon: "system",
           keepAlive: true,
           hidden: false,
           roles: ["ADMIN"],
@@ -94,7 +94,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "ServiceEmotions",
         meta: {
           title: "用户情绪列表",
-          icon: "user",
+          icon: "document",
           keepAlive: true,
           hidden: false,
           roles: ["ADMIN"],
@@ -106,7 +106,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "ChatEmotions",
         meta: {
           title: "情绪对话",
-          icon: "user",
+          icon: "language",
           keepAlive: true,
           hidden: false,
           roles: ["ADMIN"],

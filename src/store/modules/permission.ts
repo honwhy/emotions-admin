@@ -75,7 +75,7 @@ export const usePermissionStore = defineStore("permission", () => {
 
   // actions
   function setRoutes(newRoutes: RouteRecordRaw[]) {
-    routes.value = constantRoutes.concat(newRoutes);
+    routes.value = constantRoutes.concat([]);
   }
   /**
    * 生成动态路由

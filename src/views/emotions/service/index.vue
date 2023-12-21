@@ -31,35 +31,36 @@
 import { getModList, getContentList } from "@/api/emotion/index";
 import { ref, reactive } from "vue";
 import { getScoreEmoji } from "../helper";
+import { ExperienceItem } from "@/api/emotion/types";
 defineOptions({
   name: "ServiceEmotions",
 });
 const form = reactive({
   module: "",
 });
-const data = [
-  {
-    date: "2016-05-02",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1518 弄",
-  },
-  {
-    date: "2016-05-04",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1517 弄",
-  },
-  {
-    date: "2016-05-01",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1519 弄",
-  },
-  {
-    date: "2016-05-03",
-    name: "王小虎",
-    address: "上海市普陀区金沙江路 1516 弄",
-  },
-];
-const tableData = ref(data);
+// const data = [
+//   {
+//     date: "2016-05-02",
+//     name: "王小虎",
+//     address: "上海市普陀区金沙江路 1518 弄",
+//   },
+//   {
+//     date: "2016-05-04",
+//     name: "王小虎",
+//     address: "上海市普陀区金沙江路 1517 弄",
+//   },
+//   {
+//     date: "2016-05-01",
+//     name: "王小虎",
+//     address: "上海市普陀区金沙江路 1519 弄",
+//   },
+//   {
+//     date: "2016-05-03",
+//     name: "王小虎",
+//     address: "上海市普陀区金沙江路 1516 弄",
+//   },
+// ];
+const tableData = ref<ExperienceItem[]>();
 
 onMounted(() => {
   queryModList();
