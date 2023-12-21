@@ -1,5 +1,20 @@
 <template>
   <div class="app-container">
+    <el-form :model="form" label-width="auto" inline label-position="left">
+      <el-form-item label="模块">
+        <el-select v-model="form.module" placeholder="请选择模块">
+          <el-option
+            v-for="item in modList"
+            :label="item"
+            :value="item"
+            :key="item"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="queryContentList">查询</el-button>
+      </el-form-item>
+    </el-form>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="date" label="日期" width="180" />
       <el-table-column prop="name" label="姓名" width="180" />
@@ -10,9 +25,12 @@
 
 <script setup lang="ts">
 import { getModList, getContentList } from "@/api/emotion/index";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 defineOptions({
   name: "ServiceEmotions",
+});
+const form = reactive({
+  module: "",
 });
 const data = [
   {
@@ -42,10 +60,11 @@ onMounted(() => {
   queryModList();
   queryContentList();
 });
-
+const modList = ref<string[]>([]);
 function queryModList() {
   getModList({}).then(({ data }) => {
     console.log("ModList=>", data);
+    modList.value = data;
   });
 }
 function queryContentList() {
