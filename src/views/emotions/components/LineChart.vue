@@ -1,5 +1,5 @@
 <template>
-  <v-chart ref="instance" :option="options" />
+  <v-chart ref="instance" :option="options" class="v-charts" />
 </template>
 <script setup lang="ts">
 import { use } from "echarts/core";
@@ -63,18 +63,33 @@ const options = computed<EChartsOption>(() => ({
     borderColor: "#ccc",
     shadowBlur: 0,
   },
-  legend: {
-    padding: [10, 0, 0, 0],
-  },
   xAxis: {
     type: "category",
     data: [0, 1, 2, 3, 4, 5, 6, 7],
-    show: false,
+    show: true,
     boundaryGap: false,
+    axisPointer: {
+      value: 1,
+      z: 1,
+      snap: true,
+      lineStyle: {
+        color: "#7581BD",
+        width: 2,
+      },
+      label: {
+        show: false,
+      },
+      handle: {
+        show: props.isUser,
+        size: 20,
+      },
+      triggerTooltip: false,
+    },
   },
   yAxis: {
     type: "value",
     show: false,
+    max: 5.5,
   },
   tooltip: {
     show: props.isUser,
@@ -82,7 +97,14 @@ const options = computed<EChartsOption>(() => ({
     alwaysShowContent: true,
     position: function (point, params, dom, rect, size) {
       // 固定在顶部
-      return [point[0], "10%"];
+      return [point[0], "10px"];
+    },
+    formatter: (params: any) => {
+      console.log("tooltip formatter. params", params);
+      if (params.dataIndex === 0 || params.dataIndex == 7) {
+        return "-";
+      }
+      return props.list[params.dataIndex - 1].summary;
     },
   },
   series: [
@@ -101,7 +123,7 @@ const options = computed<EChartsOption>(() => ({
         position: "inside",
         formatter: ({ data, dataIndex }) => {
           if (dataIndex === 0 || dataIndex === 7) {
-            return "";
+            return "-";
           }
           switch (data) {
             case 1:
