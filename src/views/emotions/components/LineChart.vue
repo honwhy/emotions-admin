@@ -44,6 +44,7 @@ import VChart from "vue-echarts";
 import { ref, computed, nextTick } from "vue";
 import { ExperienceItem } from "@/api/emotion/types";
 import { pushContent } from "@/api/emotion/index";
+import { getScoreEmoji } from "../helper";
 
 use([GridComponent, LineChart, CanvasRenderer]);
 interface Props {
@@ -138,19 +139,7 @@ const options = computed<EChartsOption>(() => ({
           if (dataIndex === 0 || dataIndex === 7) {
             return "-";
           }
-          switch (data) {
-            case 1:
-              return `🙄`;
-            case 2:
-              return `😶`;
-            case 3:
-              return `🙂`;
-            case 4:
-              return `😊`;
-            case 5:
-              return `😁`;
-          }
-          return `😁`;
+          return getScoreEmoji(data as number);
         },
       },
       endLabel: {
