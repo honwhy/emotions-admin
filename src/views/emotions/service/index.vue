@@ -21,6 +21,7 @@
       <el-table-column prop="module" label="模块" />
       <el-table-column prop="flow_path" label="阶段" />
       <el-table-column prop="scene" label="接触点" />
+      <el-table-column prop="content" label="内容" />
       <el-table-column prop="summary" label="摘要" />
       <el-table-column prop="score" label="情绪" :formatter="formatter" />
     </el-table>
