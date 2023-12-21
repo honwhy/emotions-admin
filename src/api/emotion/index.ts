@@ -63,3 +63,15 @@ export function getModList(data: any): AxiosPromise<string[]> {
     data: data,
   });
 }
+/**
+ * 推送数据到业务系统
+ * @param data
+ * @returns
+ */
+export function pushContent(data: any): AxiosPromise<string> {
+  return request2({
+    url: "/business/pushContent",
+    method: "post",
+    data: data,
+  });
+}

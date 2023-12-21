@@ -1,5 +1,10 @@
 <template>
-  <v-chart ref="instance" :option="options" class="v-charts" />
+  <v-chart
+    ref="instance"
+    :option="options"
+    class="v-charts"
+    @select="handleSelect"
+  />
 </template>
 <script setup lang="ts">
 import { use } from "echarts/core";
@@ -36,6 +41,8 @@ type EChartsOption = ComposeOption<
 import VChart from "vue-echarts";
 import { ref, computed } from "vue";
 import { ExperienceItem } from "@/api/emotion/types";
+import { pushContent } from "@/api/emotion/index";
+import { connect } from "net";
 
 use([GridComponent, LineChart, CanvasRenderer]);
 interface Props {
@@ -95,17 +102,20 @@ const options = computed<EChartsOption>(() => ({
     show: props.isUser,
     trigger: "item",
     alwaysShowContent: true,
+    confine: true,
     position: function (point, params, dom, rect, size) {
       // 固定在顶部
-      return [point[0], "10px"];
+      // console.log('position.dom', dom);
+      return [point[0] - rect!.width, 5];
     },
     formatter: (params: any) => {
-      console.log("tooltip formatter. params", params);
+      // console.log("tooltip formatter. params", params);
       if (params.dataIndex === 0 || params.dataIndex == 7) {
-        return "-";
+        return "";
       }
       return props.list[params.dataIndex - 1].summary;
     },
+    enterable: true,
   },
   series: [
     {
@@ -148,6 +158,32 @@ const options = computed<EChartsOption>(() => ({
     },
   ],
 }));
+function handleSelect(params: { dataIndexInside: number }) {
+  console.log("handleSelect", params);
+  if (
+    params.dataIndexInside === 0 ||
+    params.dataIndexInside === 7 ||
+    !props.isUser
+  ) {
+    return;
+  }
+  ElMessageBox.confirm("是否确认推送数据到业务系统", "提示")
+    .then(() => {
+      console.log("确认处理的逻辑");
+      const content = props.list[params.dataIndexInside - 1];
+      const p = {
+        module: content.module,
+        content,
+      };
+      pushContent(p).then(({ data }) => {
+        ElMessage({
+          message: "推送成功",
+          type: "success",
+        });
+      });
+    })
+    .catch(() => {});
+}
 const option = ref<EChartsOption>({
   grid: {
     // 让图表占满容器
