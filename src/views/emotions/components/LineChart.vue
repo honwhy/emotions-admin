@@ -3,7 +3,7 @@
     ref="instance"
     :option="options"
     class="v-charts"
-    @select="handleSelect"
+    @selectchanged="handleSelect"
   />
 </template>
 <script setup lang="ts">
@@ -116,6 +116,7 @@ const options = computed<EChartsOption>(() => ({
       return props.list[params.dataIndex - 1].summary;
     },
     enterable: true,
+    extraCssText: "z-index: 100",
   },
   series: [
     {
@@ -158,7 +159,8 @@ const options = computed<EChartsOption>(() => ({
     },
   ],
 }));
-function handleSelect(params: { dataIndexInside: number }) {
+function handleSelect(arg: { fromActionPayload: { dataIndexInside: number } }) {
+  const params = arg.fromActionPayload;
   console.log("handleSelect", params);
   if (
     params.dataIndexInside === 0 ||
@@ -167,7 +169,12 @@ function handleSelect(params: { dataIndexInside: number }) {
   ) {
     return;
   }
-  ElMessageBox.confirm("是否确认推送数据到业务系统", "提示")
+  ElMessageBox.confirm("是否确认推送数据到业务系统", "提示", {
+    appendTo: "body",
+    customStyle: {
+      zIndex: 9999,
+    },
+  })
     .then(() => {
       console.log("确认处理的逻辑");
       const content = props.list[params.dataIndexInside - 1];
