@@ -148,7 +148,9 @@
       <el-col :span="4">
         <div class="column-content column-first">
           <div class="thought-titles">
+            <!--
             <div class="top">想法</div>
+            -->
             <div class="bottom">情绪曲线</div>
           </div>
         </div>
