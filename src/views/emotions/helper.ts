@@ -11,5 +11,5 @@ export function getScoreEmoji(score: number) {
     case 5:
       return `😁`;
   }
-  return `😁`;
+  return `🙂`;
 }

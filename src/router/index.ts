@@ -56,7 +56,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: "/emotions",
     component: Layout,
-    redirect: "/emotions/user",
+    redirect: "/emotions/chat",
     name: "/emotions",
     meta: {
       title: "体验地图",
@@ -65,11 +65,23 @@ export const constantRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
+        path: "chat",
+        component: () => import("@/views/emotions/chat/index.vue"),
+        name: "ChatEmotions",
+        meta: {
+          title: "情绪对话",
+          icon: "language",
+          keepAlive: true,
+          hidden: false,
+          roles: ["ADMIN"],
+        },
+      },
+      {
         path: "user",
         component: () => import("@/views/emotions/user/index.vue"),
         name: "UserEmotions",
         meta: {
-          title: "用户体验地图",
+          title: "个人体验地图",
           icon: "role",
           keepAlive: true,
           hidden: false,
@@ -81,7 +93,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/emotions/system/index.vue"),
         name: "SystemEmotions",
         meta: {
-          title: "系统体验地图",
+          title: "客群体验地图",
           icon: "system",
           keepAlive: true,
           hidden: false,
@@ -95,18 +107,6 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "用户情绪列表",
           icon: "document",
-          keepAlive: true,
-          hidden: false,
-          roles: ["ADMIN"],
-        },
-      },
-      {
-        path: "chat",
-        component: () => import("@/views/emotions/chat/index.vue"),
-        name: "ChatEmotions",
-        meta: {
-          title: "情绪对话",
-          icon: "language",
           keepAlive: true,
           hidden: false,
           roles: ["ADMIN"],

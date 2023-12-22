@@ -5,6 +5,7 @@
         <el-input
           v-model="question"
           :autosize="{ minRows: 5, maxRows: 10 }"
+          :input-style="{ fontSize: '18px' }"
           type="textarea"
           placeholder="请输入"
         />
@@ -20,6 +21,7 @@
         <el-input
           v-model="answer"
           :autosize="{ minRows: 5, maxRows: 10 }"
+          :input-style="{ fontSize: '18px' }"
           type="textarea"
           placeholder=""
         />
@@ -31,6 +33,7 @@
 import { ref } from "vue";
 import { getAnswer } from "@/api/emotion/index";
 import type { QaAnswer } from "@/api/emotion/types";
+import { getScoreEmoji } from "../helper";
 defineOptions({
   name: "ChatEmotions",
 });
@@ -41,7 +44,7 @@ function onQuery() {
   loading.value = true;
   getAnswer({ content: question.value })
     .then(({ data }) => {
-      answer.value = data.summary;
+      answer.value = getScoreEmoji(Math.floor(data.score)) + data.summary;
     })
     .finally(() => {
       loading.value = false;

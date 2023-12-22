@@ -106,6 +106,44 @@
       </el-col>
       -->
     </el-row>
+    <el-row :gutter="12" class="touch row">
+      <el-col :span="4">
+        <div class="column-content column-first">模块</div>
+      </el-col>
+      <el-col v-for="item in pageData" :key="item.flow_path" :span="3">
+        <div class="column-content">
+          {{ item.module }}
+        </div>
+      </el-col>
+      <template v-if="pageData.length === 0">
+        <el-col
+          v-for="item in Array.from([1, 2, 3, 4, 5, 6])"
+          :key="item"
+          :span="3"
+        >
+          <div class="column-content">--</div>
+        </el-col>
+      </template>
+    </el-row>
+    <el-row v-if="isUser" :gutter="12" class="touch row">
+      <el-col :span="4">
+        <div class="column-content column-first">摘要</div>
+      </el-col>
+      <el-col v-for="item in pageData" :key="item.flow_path" :span="3">
+        <div class="column-content">
+          {{ item.summary }}
+        </div>
+      </el-col>
+      <template v-if="pageData.length === 0">
+        <el-col
+          v-for="item in Array.from([1, 2, 3, 4, 5, 6])"
+          :key="item"
+          :span="3"
+        >
+          <div class="column-content">--</div>
+        </el-col>
+      </template>
+    </el-row>
     <el-row :gutter="12" class="thought row">
       <el-col :span="4">
         <div class="column-content column-first">
