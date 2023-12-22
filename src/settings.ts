@@ -1,5 +1,5 @@
 const defaultSettings: AppSettings = {
-  title: "vue3-element-admin",
+  title: "客户体验demo",
   version: "v2.7.0",
   showSettings: true,
   tagsView: true,
