@@ -164,7 +164,7 @@ function handleSelect(arg: { fromActionPayload: { dataIndexInside: number } }) {
   }
   const content = props.list[params.dataIndexInside - 1];
   ElMessageBox.confirm(
-    "是否确认推送数据到业务系统：" + content.module,
+    "是否确认推送数据到业务系统：" + content.moduleName,
     "提示",
     {
       appendTo: "body",

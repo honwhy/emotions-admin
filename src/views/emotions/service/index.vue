@@ -5,9 +5,9 @@
         <el-select v-model="form.module" placeholder="请选择模块">
           <el-option
             v-for="item in modList"
-            :label="item"
-            :value="item"
-            :key="item"
+            :label="item.moduleName"
+            :value="item.module"
+            :key="item.module"
           />
         </el-select>
       </el-form-item>
@@ -18,7 +18,7 @@
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="record_id" label="记录ID" width="180" />
       <el-table-column prop="user_id" label="用户ID" width="180" />
-      <el-table-column prop="module" label="模块" />
+      <el-table-column prop="module" label="模块" :formatter="formatModule" />
       <el-table-column prop="flow_path" label="阶段" />
       <el-table-column prop="scene" label="接触点" />
       <el-table-column prop="content" label="内容" />
@@ -32,7 +32,7 @@
 import { getModList, getContentList } from "@/api/emotion/index";
 import { ref, reactive } from "vue";
 import { getScoreEmoji } from "../helper";
-import { ExperienceItem } from "@/api/emotion/types";
+import { ExperienceItem, ModuleInfo } from "@/api/emotion/types";
 defineOptions({
   name: "ServiceEmotions",
 });
@@ -67,7 +67,7 @@ onMounted(() => {
   queryModList();
   queryContentList();
 });
-const modList = ref<string[]>([]);
+const modList = ref<ModuleInfo[]>([]);
 function queryModList() {
   getModList({}).then(({ data }) => {
     console.log("ModList=>", data);
@@ -80,7 +80,10 @@ function queryContentList() {
     tableData.value = data;
   });
 }
-function formatter(row, column, cellValue, index) {
+function formatter(row: any, column: any, cellValue: number, index: any) {
   return getScoreEmoji(cellValue as number);
+}
+function formatModule(row: any, column: any, cellValue: string, index: any) {
+  return modList.value.find((it) => it.module === cellValue)?.moduleName;
 }
 </script>

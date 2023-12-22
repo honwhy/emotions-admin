@@ -112,7 +112,7 @@
       </el-col>
       <el-col v-for="item in pageData" :key="item.flow_path" :span="3">
         <div class="column-content">
-          {{ item.module }}
+          {{ item.moduleName }}
         </div>
       </el-col>
       <template v-if="pageData.length === 0">

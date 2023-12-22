@@ -1,6 +1,6 @@
 import request2 from "@/utils/request2";
 import { AxiosPromise } from "axios";
-import type { ExperienceItem, QaAnswer } from "./types";
+import type { ExperienceItem, QaAnswer, ModuleInfo } from "./types";
 
 /**
  * 获取用户情绪地图
@@ -56,7 +56,7 @@ export function getContentList(data: any): AxiosPromise<ExperienceItem[]> {
  * @param data
  * @returns
  */
-export function getModList(data: any): AxiosPromise<string[]> {
+export function getModList(data: any): AxiosPromise<ModuleInfo[]> {
   return request2({
     url: "/business/getModuleList",
     method: "post",

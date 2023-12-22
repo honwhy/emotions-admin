@@ -8,9 +8,15 @@ export interface ExperienceItem {
   score: number;
   summary: string;
   module: string;
+  moduleName: string;
 }
 
 export interface QaAnswer {
   score: number;
   summary: string;
+}
+
+export interface ModuleInfo {
+  module: string;
+  moduleName: string;
 }
