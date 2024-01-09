@@ -26,6 +26,13 @@
           placeholder=""
         />
       </el-col>
+      <div class="emojis">
+        <span>{{ getScoreEmoji(1) }}</span>
+        <span>{{ getScoreEmoji(2) }}</span>
+        <span>{{ getScoreEmoji(3) }}</span>
+        <span>{{ getScoreEmoji(4) }}</span>
+        <span>{{ getScoreEmoji(5) }}</span>
+      </div>
     </el-row>
   </div>
 </template>
@@ -34,6 +41,7 @@ import { ref } from "vue";
 import { getAnswer } from "@/api/emotion/index";
 import type { QaAnswer } from "@/api/emotion/types";
 import { getScoreEmoji } from "../helper";
+import "twemoji-colr-font/twemoji.css";
 defineOptions({
   name: "ChatEmotions",
 });
@@ -51,3 +59,9 @@ function onQuery() {
     });
 }
 </script>
+<style scoped>
+.emojis {
+  font-family: "PingFang SC", "Microsoft YaHei", Twemoji, Arial, Helvetica,
+    sans-serif;
+}
+</style>
