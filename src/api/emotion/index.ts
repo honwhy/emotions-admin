@@ -75,3 +75,16 @@ export function pushContent(data: any): AxiosPromise<string> {
     data: data,
   });
 }
+
+/**
+ *
+ * @param data
+ * @returns
+ */
+export function getFlowPathList(data: any): AxiosPromise<string[]> {
+  return request2({
+    url: "/experience/getFlowPathList",
+    method: "post",
+    data: data,
+  });
+}
