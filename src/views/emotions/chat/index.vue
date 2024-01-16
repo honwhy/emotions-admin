@@ -7,7 +7,8 @@
           class="m-2"
           placeholder="请选择"
           size="large"
-          default-first-option
+          :default-first-option="true"
+          :filterable="true"
         >
           <el-option
             v-for="item in userList"
@@ -29,10 +30,16 @@
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="12">
-      <el-col :span="9" style="height: 550px">
+    <el-row :gutter="12" class="emojis">
+      <el-col :span="9" style="height: 559px">
         <el-image
-          style="width: 100%; height: 100%"
+          style="
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            box-shadow: 0 0 0 1px
+              var(--el-input-border-color, var(--el-border-color)) inset;
+          "
           :src="imageList[activeIndex]"
           :zoom-rate="1.2"
           :max-scale="7"
@@ -45,9 +52,14 @@
         <el-input
           v-model="answer"
           :autosize="{ minRows: 15, maxRows: 15 }"
-          :input-style="{ fontSize: '18px' }"
+          :input-style="{
+            fontSize: '18px',
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0,
+          }"
           type="textarea"
           placeholder="思考中..."
+          readonly
         />
         <!-- <div style="margin: 20px 0; text-align: right">
           <el-button type="primary" @click="onQuery" :disabled="question === ''" :loading="loading">提交</el-button>
@@ -56,7 +68,11 @@
           <el-input
             v-model="question"
             :autosize="{ minRows: 5, maxRows: 10 }"
-            :input-style="{ fontSize: '18px' }"
+            :input-style="{
+              fontSize: '18px',
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+            }"
             type="textarea"
             placeholder="请输入"
           />
@@ -65,22 +81,21 @@
             type="primary"
             @click="onQuery"
             :disabled="question === ''"
-            :loading="loading"
             >提交</el-button
           >
         </div>
       </el-col>
       <div class="emojis">
         <span>
-          <el-icon :size="18" :color="'#939c9e'">
+          <el-icon :size="18" :color="'#939c9e'" style="cursor: pointer">
             <QuestionFilled />
           </el-icon>
         </span>
-        <span>{{ getScoreEmoji(1) }}</span>
+        <!-- <span>{{ getScoreEmoji(1) }}</span>
         <span>{{ getScoreEmoji(2) }}</span>
         <span>{{ getScoreEmoji(3) }}</span>
         <span>{{ getScoreEmoji(4) }}</span>
-        <span>{{ getScoreEmoji(5) }}</span>
+        <span>{{ getScoreEmoji(5) }}</span> -->
       </div>
     </el-row>
   </div>
@@ -124,6 +139,7 @@ const userList = ref<string[]>([]);
 function queryUserList() {
   getUserList({}).then(({ data }) => {
     userList.value = data;
+    userId.value = userList.value[0];
   });
 }
 const flowPathList = ref<string[]>([]);
