@@ -15,6 +15,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 import UnoCSS from "unocss/vite";
 import { resolve } from "path";
+import mockDevServerPlugin from "vite-plugin-mock-dev-server";
 
 const pathSrc = resolve(__dirname, "src");
 //  https://cn.vitejs.dev/config
@@ -68,6 +69,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     },
     plugins: [
       vue(),
+      mockDevServerPlugin(),
       vueJsx(),
       UnoCSS({
         hmrTopLevelAwait: false,

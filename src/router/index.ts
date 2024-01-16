@@ -89,24 +89,24 @@ export const constantRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: "system",
-        component: () => import("@/views/emotions/system/index.vue"),
-        name: "SystemEmotions",
-        meta: {
-          title: "客群体验地图",
-          icon: "system",
-          keepAlive: true,
-          hidden: false,
-          roles: ["ADMIN"],
-        },
-      },
-      {
         path: "service",
         component: () => import("@/views/emotions/service/index.vue"),
         name: "ServiceEmotions",
         meta: {
           title: "用户情绪列表",
           icon: "document",
+          keepAlive: true,
+          hidden: false,
+          roles: ["ADMIN"],
+        },
+      },
+      {
+        path: "system",
+        component: () => import("@/views/emotions/system/index.vue"),
+        name: "SystemEmotions",
+        meta: {
+          title: "客群体验地图",
+          icon: "system",
           keepAlive: true,
           hidden: false,
           roles: ["ADMIN"],
