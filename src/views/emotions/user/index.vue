@@ -6,6 +6,7 @@
       placeholder="请选择"
       size="large"
       default-first-option
+      filterable
     >
       <el-option
         v-for="item in userList"
@@ -35,6 +36,7 @@ const userList = ref<string[]>([]);
 function queryUserList() {
   getUserList({}).then(({ data }) => {
     userList.value = data;
+    userId.value = userList.value[0];
   });
 }
 </script>

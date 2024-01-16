@@ -9,6 +9,7 @@
           size="large"
           :default-first-option="true"
           :filterable="true"
+          style="margin: 0"
         >
           <el-option
             v-for="item in userList"
@@ -58,7 +59,7 @@
             borderBottomRightRadius: 0,
           }"
           type="textarea"
-          placeholder="思考中..."
+          :placeholder="thinking"
           readonly
         />
         <!-- <div style="margin: 20px 0; text-align: right">
@@ -124,7 +125,8 @@ function onQuery() {
   loading.value = true;
   getAnswer({ content: question.value })
     .then(({ data }) => {
-      answer.value = getScoreEmoji(Math.floor(data.score)) + data.summary;
+      const something = data.summary;
+      showAnswer(getScoreEmoji(Math.floor(data.score)), something);
     })
     .finally(() => {
       loading.value = false;
@@ -133,7 +135,9 @@ function onQuery() {
 onMounted(() => {
   queryUserList();
   queryFlowPathList();
+  onThinking();
 });
+const thinking = ref("思考中...");
 const userId = ref("");
 const userList = ref<string[]>([]);
 function queryUserList() {
@@ -150,6 +154,37 @@ function queryFlowPathList() {
 }
 const activeIndex = ref(0);
 const imageList = [img1, img2, img3, img4, img5, img6];
+
+let timer1 = null;
+function onThinking() {
+  timer1 = setInterval(() => {
+    if (thinking.value === "思考中") {
+      thinking.value = "思考中.";
+    } else if (thinking.value === "思考中.") {
+      thinking.value = "思考中..";
+    } else if (thinking.value === "思考中..") {
+      thinking.value = "思考中...";
+    } else {
+      thinking.value = "思考中";
+    }
+  }, 16 * 30);
+}
+function showAnswer(emoji: string, something: string) {
+  answer.value = emoji;
+  const array = something.split("");
+  repeat(0, array);
+}
+function repeat(index: number, array: string[]) {
+  setTimeout(() => {
+    if (index < array.length) {
+      answer.value += array[index];
+      repeat(index + 1, array);
+    }
+  }, 16 * 30);
+}
+onUnmounted(() => {
+  timer1 = null;
+});
 </script>
 <style scoped lang="scss">
 .emojis {
