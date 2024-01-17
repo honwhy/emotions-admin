@@ -34,7 +34,7 @@ export function getUserList(data: any): AxiosPromise<string[]> {
  */
 export function getAnswer(data: any): AxiosPromise<QaAnswer> {
   return request2({
-    url: "/test_qa",
+    url: "/user_qa",
     method: "post",
     data: data,
   });

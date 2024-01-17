@@ -123,7 +123,12 @@ const answer = ref("");
 const loading = ref(false);
 function onQuery() {
   loading.value = true;
-  getAnswer({ content: question.value })
+  getAnswer({
+    content: question.value,
+    flow_path: flowPathList.value[activeIndex.value],
+    user_id: userId.value,
+    scene: "意见反馈",
+  })
     .then(({ data }) => {
       const something = data.summary;
       showAnswer(getScoreEmoji(Math.floor(data.score)), something);
