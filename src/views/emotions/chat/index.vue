@@ -90,10 +90,35 @@
       </el-col>
       <div class="emojis">
         <span>
-          <el-icon :size="18" :color="'#939c9e'" style="cursor: pointer">
+          <el-icon
+            ref="iconRef"
+            v-click-outside="onClickOutside"
+            :size="18"
+            :color="'#939c9e'"
+            style="cursor: pointer"
+          >
             <QuestionFilled />
           </el-icon>
         </span>
+        <el-popover
+          ref="popoverRef"
+          :virtual-ref="iconRef"
+          trigger="click"
+          title="Prompt"
+          virtual-triggering
+          :width="350"
+          placement="left-end"
+          teleported
+          :popper-style="'white-space: pre-wrap;height:500px;'"
+        >
+          <el-scrollbar
+            max-height="460px"
+            :view-style="'max-height: 440px;overflow:auto;'"
+            view-class="prompt-text-content"
+          >
+            {{ promptText }}
+          </el-scrollbar>
+        </el-popover>
         <!-- <span>{{ getScoreEmoji(1) }}</span>
         <span>{{ getScoreEmoji(2) }}</span>
         <span>{{ getScoreEmoji(3) }}</span>
@@ -104,7 +129,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, unref } from "vue";
 import { getAnswer, getUserList, getFlowPathList } from "@/api/emotion/index";
 import type { QaAnswer } from "@/api/emotion/types";
 import { getScoreEmoji } from "../helper";
@@ -116,6 +141,8 @@ import img4 from "@/assets/images/usage.jpg";
 import img5 from "@/assets/images/claim.jpg";
 import img6 from "@/assets/images/comment.jpg";
 import { QuestionFilled, ChatLineSquare } from "@element-plus/icons-vue";
+import promptText from "@/assets/prompt.txt?raw";
+import { ClickOutside as vClickOutside } from "element-plus";
 
 defineOptions({
   name: "ChatEmotions",
@@ -189,6 +216,12 @@ function repeat(index: number, array: string[]) {
     }
   }, 16 * 20);
 }
+const iconRef = ref();
+const popoverRef = ref();
+const onClickOutside = () => {
+  unref(popoverRef).popperRef?.delayHide?.();
+};
+
 onUnmounted(() => {
   timer1 = null;
 });
@@ -328,5 +361,12 @@ onUnmounted(() => {
   position: relative;
   bottom: 34px;
   left: calc(100% - 82px);
+}
+</style>
+<style lang="scss">
+.prompt-text-content {
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>

@@ -72,6 +72,8 @@ function queryModList() {
   getModList({}).then(({ data }) => {
     console.log("ModList=>", data);
     modList.value = data;
+    form.module = modList.value[0].module;
+    queryContentList();
   });
 }
 function queryContentList() {
