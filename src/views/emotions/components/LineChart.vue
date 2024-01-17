@@ -64,7 +64,7 @@ const ydata = computed(() => {
 const options = computed<EChartsOption>(() => ({
   grid: {
     // 让图表占满容器
-    top: "0px",
+    top: "10px",
     left: "0px",
     right: "0px",
     bottom: "0px",
@@ -107,7 +107,7 @@ const options = computed<EChartsOption>(() => ({
     trigger: "item",
     alwaysShowContent: true,
     confine: true,
-    position: function (point, params, dom, rect, size) {
+    position: function (point, _params, _dom, rect, _size) {
       // 固定在顶部
       // console.log('position.dom', dom);
       return [point[0] - rect!.width, 5];
