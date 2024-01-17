@@ -82,6 +82,8 @@
             type="primary"
             @click="onQuery"
             :disabled="question === ''"
+            :loading="loading"
+            :icon="ChatLineSquare"
             >提交</el-button
           >
         </div>
@@ -113,7 +115,7 @@ import img3 from "@/assets/images/pay.jpg";
 import img4 from "@/assets/images/usage.jpg";
 import img5 from "@/assets/images/claim.jpg";
 import img6 from "@/assets/images/comment.jpg";
-import { QuestionFilled } from "@element-plus/icons-vue";
+import { QuestionFilled, ChatLineSquare } from "@element-plus/icons-vue";
 
 defineOptions({
   name: "ChatEmotions",
@@ -325,6 +327,6 @@ onUnmounted(() => {
 .send-button {
   position: relative;
   bottom: 34px;
-  left: calc(100% - 62px);
+  left: calc(100% - 82px);
 }
 </style>
