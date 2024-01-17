@@ -106,7 +106,7 @@
           trigger="click"
           title="Prompt"
           virtual-triggering
-          :width="350"
+          :width="450"
           placement="left-end"
           teleported
           :popper-style="'white-space: pre-wrap;height:500px;'"
@@ -119,11 +119,13 @@
             {{ promptText }}
           </el-scrollbar>
         </el-popover>
-        <!-- <span>{{ getScoreEmoji(1) }}</span>
-        <span>{{ getScoreEmoji(2) }}</span>
-        <span>{{ getScoreEmoji(3) }}</span>
-        <span>{{ getScoreEmoji(4) }}</span>
-        <span>{{ getScoreEmoji(5) }}</span> -->
+        <div style="color: #939c9e">
+          <span>{{ getScoreEmoji(1) }} —— 重度负面</span><br />
+          <span>{{ getScoreEmoji(2) }} —— 负面</span><br />
+          <span>{{ getScoreEmoji(3) }} —— 中性</span><br />
+          <span>{{ getScoreEmoji(4) }} —— 正面</span><br />
+          <span>{{ getScoreEmoji(5) }} —— 积极</span>
+        </div>
       </div>
     </el-row>
   </div>
@@ -152,6 +154,8 @@ const answer = ref("");
 const loading = ref(false);
 function onQuery() {
   loading.value = true;
+  thinking.value = "思考中...";
+  onThinking();
   getAnswer({
     content: question.value,
     flow_path: flowPathList.value[activeIndex.value],
@@ -169,9 +173,8 @@ function onQuery() {
 onMounted(() => {
   queryUserList();
   queryFlowPathList();
-  onThinking();
 });
-const thinking = ref("思考中...");
+const thinking = ref("提交输入后将展示摘要及情绪");
 const userId = ref("");
 const userList = ref<string[]>([]);
 function queryUserList() {
@@ -214,7 +217,7 @@ function repeat(index: number, array: string[]) {
       answer.value += array[index];
       repeat(index + 1, array);
     }
-  }, 16 * 20);
+  }, 16 * 10);
 }
 const iconRef = ref();
 const popoverRef = ref();

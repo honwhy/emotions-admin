@@ -91,7 +91,7 @@ export function getFlowPathList(data: any): AxiosPromise<string[]> {
 
 export function getData(data: any): AxiosPromise<DataObject> {
   return request2({
-    url: "/get/data",
+    url: "/data/get",
     method: "post",
     data: data,
   });
