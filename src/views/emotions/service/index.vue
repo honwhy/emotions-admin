@@ -16,19 +16,29 @@
       </el-form-item>
     </el-form>
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="record_id" label="记录ID" width="180" />
-      <el-table-column prop="user_id" label="用户ID" width="180" />
-      <el-table-column prop="module" label="模块" :formatter="formatModule" />
-      <el-table-column prop="flow_path" label="阶段" />
-      <el-table-column prop="scene" label="接触点" />
-      <el-table-column prop="content" label="内容" />
-      <el-table-column prop="summary" label="摘要" />
-      <el-table-column prop="score" label="情绪" :formatter="formatter" />
+      <el-table-column prop="record_id" label="记录ID" width="100" />
+      <el-table-column prop="user_id" label="用户ID" width="100" />
+      <el-table-column
+        prop="module"
+        label="模块"
+        :formatter="formatModule"
+        width="100"
+      />
+      <el-table-column prop="flow_path" label="阶段" width="150" />
+      <el-table-column prop="scene" label="接触点" width="150" />
+      <el-table-column prop="content" label="内容" min-width="240" />
+      <el-table-column prop="summary" label="摘要" min-width="180" />
+      <el-table-column
+        prop="score"
+        label="情绪"
+        :formatter="formatter"
+        width="100"
+      />
     </el-table>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import { getModList, getContentList } from "@/api/emotion/index";
 import { ref, reactive } from "vue";
 import { getScoreEmoji } from "../helper";
@@ -83,9 +93,12 @@ function queryContentList() {
   });
 }
 function formatter(row: any, column: any, cellValue: number, index: any) {
-  return getScoreEmoji(cellValue as number);
+  return (
+    /* eslint-disable */
+    <div style="font-size: 18px">{getScoreEmoji(cellValue as number)}</div>
+  );
 }
 function formatModule(row: any, column: any, cellValue: string, index: any) {
-  return modList.value.find((it) => it.module === cellValue)?.moduleName;
+  return modList.value.find((it) => it.module === cellValue)?.moduleName || "";
 }
 </script>

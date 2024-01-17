@@ -1,4 +1,4 @@
-export function getScoreEmoji(score: number) {
+export function getScoreEmoji(score: number): string {
   switch (score) {
     case 1:
       return `😡`;
