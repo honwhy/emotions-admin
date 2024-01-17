@@ -1,6 +1,6 @@
 import request2 from "@/utils/request2";
 import { AxiosPromise } from "axios";
-import type { ExperienceItem, QaAnswer, ModuleInfo } from "./types";
+import type { ExperienceItem, QaAnswer, ModuleInfo, DataObject } from "./types";
 
 /**
  * 获取用户情绪地图
@@ -84,6 +84,14 @@ export function pushContent(data: any): AxiosPromise<string> {
 export function getFlowPathList(data: any): AxiosPromise<string[]> {
   return request2({
     url: "/experience/getFlowPathList",
+    method: "post",
+    data: data,
+  });
+}
+
+export function getData(data: any): AxiosPromise<DataObject> {
+  return request2({
+    url: "/get/data",
     method: "post",
     data: data,
   });

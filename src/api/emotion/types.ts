@@ -20,3 +20,5 @@ export interface ModuleInfo {
   module: string;
   moduleName: string;
 }
+
+export type DataObject = Record<string, Record<string, number>>;
