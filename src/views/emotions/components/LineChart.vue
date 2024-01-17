@@ -62,9 +62,12 @@ const ydata = computed(() => {
   return temp;
 });
 const options = computed<EChartsOption>(() => ({
+  legend: {
+    top: 60,
+  },
   grid: {
     // 让图表占满容器
-    top: "10px",
+    top: "0px",
     left: "0px",
     right: "0px",
     bottom: "0px",
@@ -99,7 +102,7 @@ const options = computed<EChartsOption>(() => ({
   yAxis: {
     type: "value",
     show: false,
-    max: 5.1,
+    max: 5.5,
   },
   tooltip: {
     // show: props.isUser,
