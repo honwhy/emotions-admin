@@ -172,7 +172,7 @@ function onThinking() {
     } else {
       thinking.value = "思考中";
     }
-  }, 16 * 30);
+  }, 16 * 20);
 }
 function showAnswer(emoji: string, something: string) {
   answer.value = emoji;
@@ -185,7 +185,7 @@ function repeat(index: number, array: string[]) {
       answer.value += array[index];
       repeat(index + 1, array);
     }
-  }, 16 * 30);
+  }, 16 * 20);
 }
 onUnmounted(() => {
   timer1 = null;
@@ -193,8 +193,8 @@ onUnmounted(() => {
 </script>
 <style scoped lang="scss">
 .emojis {
-  font-family: "PingFang SC", "Microsoft YaHei", Twemoji, Arial, Helvetica,
-    sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, Twemoji, sans-serif;
 }
 </style>
 <style scoped lang="scss">

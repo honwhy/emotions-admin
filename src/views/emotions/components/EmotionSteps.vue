@@ -39,7 +39,7 @@
       </el-col>
       -->
     </el-row>
-    <el-row :gutter="12" class="touch row">
+    <el-row :gutter="12" class="touch module row">
       <el-col :span="4">
         <div class="column-content column-first">接触点</div>
       </el-col>
@@ -106,7 +106,7 @@
       </el-col>
       -->
     </el-row>
-    <el-row :gutter="12" class="touch row">
+    <el-row :gutter="12" class="touch module row">
       <el-col :span="4">
         <div class="column-content column-first">模块</div>
       </el-col>
@@ -125,7 +125,7 @@
         </el-col>
       </template>
     </el-row>
-    <el-row v-if="isUser" :gutter="12" class="touch row">
+    <el-row v-if="isUser" :gutter="12" class="touch summary row">
       <el-col :span="4">
         <div class="column-content column-first">摘要</div>
       </el-col>
@@ -205,6 +205,12 @@ const isUser = computed(() => {
 .touch {
   :deep(.el-col) {
     height: 75px;
+  }
+}
+
+.module {
+  :deep(.el-col) {
+    height: 55px;
   }
 }
 

@@ -143,6 +143,8 @@ const options = computed<EChartsOption>(() => ({
           }
           return getScoreEmoji(data as number);
         },
+        fontFamily:
+          '"Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB","Microsoft YaHei", "微软雅黑", Arial, Twemoji, sans-serif',
       },
       endLabel: {
         show: false,
