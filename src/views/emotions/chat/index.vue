@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-row :gutter="12">
+    <el-row :gutter="16">
       <el-col :span="3">
         <el-select
           v-model="userId"
@@ -20,8 +20,18 @@
         </el-select>
       </el-col>
     </el-row>
-    <el-row :gutter="12" class="step row">
-      <el-col v-for="(item, index) in flowPathList" :key="item" :span="3">
+    <el-row :gutter="16" class="step row">
+      <el-col
+        v-for="(item, index) in flowPathList"
+        :key="item"
+        :span="3"
+        class="col-container"
+      >
+        <div
+          class="arrow"
+          :class="{ 'active-arrow': activeIndex === index }"
+          v-if="index < flowPathList.length - 1"
+        ></div>
         <div
           class="column-content"
           :class="{ active: activeIndex === index }"
@@ -31,7 +41,7 @@
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="12" class="emojis">
+    <el-row :gutter="16" class="emojis">
       <el-col :span="9" style="height: 559px">
         <el-image
           style="
@@ -364,6 +374,31 @@ onUnmounted(() => {
   position: relative;
   bottom: 34px;
   left: calc(100% - 82px);
+}
+
+.col-container {
+  position: relative;
+
+  .arrow {
+    position: absolute;
+    right: -4px;
+    width: 12px;
+    height: 100%;
+    overflow: hidden;
+
+    &::after {
+      display: block;
+      content: " ";
+      border-top: 38px solid transparent;
+      border-right: 38px solid transparent;
+      border-bottom: 38px solid transparent;
+      border-left: 12px solid #939c9e;
+    }
+
+    &.active-arrow::after {
+      border-left: 12px solid #303435;
+    }
+  }
 }
 </style>
 <style lang="scss">

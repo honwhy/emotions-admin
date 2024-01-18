@@ -1,10 +1,11 @@
 <template>
-  <el-row :gutter="12" class="step row">
+  <el-row :gutter="16" class="step row">
     <el-col :span="4">
       <div class="column-first column-content">阶段</div>
     </el-col>
-    <el-col v-for="item in pageData" :key="item.flow_path" :span="3">
+    <el-col v-for="(item, index) in pageData" :key="item.flow_path" :span="3">
       <div class="column-content">
+        <div class="arrow" v-if="index < pageData.length - 1"></div>
         {{ item.flow_path }}
       </div>
     </el-col>
@@ -38,7 +39,7 @@
       </el-col>
       -->
   </el-row>
-  <el-row :gutter="12" class="touch module row">
+  <el-row :gutter="16" class="touch module row">
     <el-col :span="4">
       <div class="column-content column-first">接触点</div>
     </el-col>
@@ -105,7 +106,7 @@
       </el-col>
       -->
   </el-row>
-  <el-row :gutter="12" class="touch module row">
+  <el-row :gutter="16" class="touch module row">
     <el-col :span="4">
       <div class="column-content column-first">模块</div>
     </el-col>
@@ -124,7 +125,7 @@
       </el-col>
     </template>
   </el-row>
-  <el-row v-if="isUser" :gutter="12" class="touch summary row">
+  <el-row v-if="isUser" :gutter="16" class="touch summary row">
     <el-col :span="4">
       <div class="column-content column-first">摘要</div>
     </el-col>
@@ -143,7 +144,7 @@
       </el-col>
     </template>
   </el-row>
-  <el-row :gutter="12" class="thought row">
+  <el-row :gutter="16" class="thought row">
     <el-col :span="4">
       <div class="column-content column-first">
         <div class="thought-titles">
@@ -202,7 +203,7 @@ const isUser = computed(() => {
 .target,
 .touch {
   :deep(.el-col) {
-    height: 75px;
+    height: 76px;
   }
 }
 
@@ -228,11 +229,29 @@ const isUser = computed(() => {
 
 .el-col {
   .column-content {
+    position: relative;
     font-size: 14px;
     color: #6a6a6c;
 
     li {
       list-style: disc;
+    }
+
+    .arrow {
+      position: absolute;
+      right: -12px;
+      width: 12px;
+      height: 100%;
+      overflow: hidden;
+
+      &::after {
+        display: block;
+        content: " ";
+        border-top: 38px solid transparent;
+        border-right: 38px solid transparent;
+        border-bottom: 38px solid transparent;
+        border-left: 12px solid #303435;
+      }
     }
   }
 }

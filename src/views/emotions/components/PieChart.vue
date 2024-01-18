@@ -1,5 +1,12 @@
 <template>
-  <v-chart id="v-chart" ref="instance" :option="options" class="v-charts" />
+  <v-chart
+    style="min-width: 280px"
+    id="v-chart"
+    ref="instance"
+    :option="options"
+    class="v-charts"
+    :autoresize="true"
+  />
 </template>
 <script setup lang="ts">
 import type { PieSeriesOption } from "echarts/charts";

@@ -6,6 +6,7 @@
     class="v-charts"
     @selectchanged="handleSelect"
     @rendered="handleFinished"
+    :autoresize="true"
   />
 </template>
 <script setup lang="ts">
