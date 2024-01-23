@@ -34,10 +34,10 @@ function queryDataList() {
   });
 }
 function parseData(data: DataObject): ItemOption[] {
-  const pathPv = data["path_pv"];
-  const pathUv = data["path_uv"];
-  const scorePv = data["score_pv"];
-  const scoreUv = data["score_uv"];
+  const pathPv = data["流程分布pv"];
+  const pathUv = data["流程分布uv"];
+  const scorePv = data["情绪分布pv"];
+  const scoreUv = data["情绪分布uv"];
   const a1 = Object.keys(pathPv).map((k) => {
     return {
       name: k,
@@ -64,19 +64,19 @@ function parseData(data: DataObject): ItemOption[] {
   });
   return [
     {
-      title: "path_pv",
+      title: "流程分布pv",
       data: a1,
     },
     {
-      title: "path_uv",
+      title: "流程分布uv",
       data: a2,
     },
     {
-      title: "score_pv",
+      title: "情绪分布pv",
       data: a3,
     },
     {
-      title: "score_uv",
+      title: "情绪分布uv",
       data: a4,
     },
   ];
